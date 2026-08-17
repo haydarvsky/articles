@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>المقالات — حيدر المعاتيق</title>
+<meta name="description" content="مقالاتُ حيدر المعاتيق في تحقيقِ النصِّ والشعرِ واللغة، وقراءاتٌ في الثقافةِ والصورة.">
+<meta name="theme-color" content="#0A3428">
+<link rel="icon" href="img/logo-cream.svg">
+<style>
+@font-face{font-family:'Sakkal Saad';src:url('fonts/sakkal-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Sakkal Saad';src:url('fonts/sakkal-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Sakkal Saad Poster';src:url('fonts/poster-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Sakkal Saad Poster';src:url('fonts/poster-900.woff2') format('woff2');font-weight:900;font-display:swap}
+
+:root{
+  --green:#0F4C3A;--green-deep:#0A3428;--amber:#C2780A;--gold:#D9A441;
+  --cream:#E8DFCC;--paper:#FAF6EF;--ink:#2A1A0F;--card:#FFFDF8;--line:rgba(15,76,58,.14);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:'Sakkal Saad',system-ui,sans-serif;font-size:19px;line-height:1.9;
+  letter-spacing:0;font-synthesis:none;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'Sakkal Saad Poster','Sakkal Saad',serif;letter-spacing:0;margin:0;line-height:1.35}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+
+.head{background:var(--green-deep);color:var(--cream);padding:26px 0 54px;position:relative;overflow:hidden}
+.head::before{content:'';position:absolute;inset:0;background:radial-gradient(70% 90% at 72% 0%,rgba(217,164,65,.15),transparent 62%)}
+.head .wrap{position:relative}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.bar img{height:44px;opacity:.95}
+.home{font-size:17px;color:var(--cream);opacity:.7;border:1px solid rgba(232,223,204,.28);border-radius:100px;padding:3px 16px;transition:.18s}
+.home:hover{opacity:1;border-color:var(--gold);color:var(--gold)}
+.head h1{margin-top:38px;font-size:clamp(34px,7vw,54px);font-weight:900}
+.head .sub{margin-top:12px;font-size:18.5px;opacity:.75;max-width:620px}
+.head .rule{width:64px;height:2px;margin-top:20px;background:linear-gradient(to left,var(--gold),rgba(217,164,65,0))}
+
+main{padding:48px 0 70px}
+.list{display:grid;gap:18px}
+.item{
+  display:block;background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:26px 28px;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.item:hover{transform:translateY(-4px);border-color:rgba(194,120,10,.45);box-shadow:0 18px 40px rgba(15,76,58,.12)}
+.kicker{font-size:16px;color:var(--amber);font-weight:700}
+.item h2{margin-top:6px;font-size:clamp(24px,4vw,30px);color:var(--green)}
+.item .line{margin-top:8px;font-size:17.5px;color:rgba(42,26,15,.66);line-height:1.8}
+.item .go{margin-top:14px;display:flex;align-items:center;gap:8px;font-size:17px;font-weight:700;color:var(--amber)}
+.item .go svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease}
+.item:hover .go svg{transform:translateX(-5px)}
+
+footer{background:var(--green-deep);color:var(--cream);padding:30px 0 34px;text-align:center}
+footer .wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+footer img{height:48px;opacity:.5}
+footer .sig{font-size:17px;opacity:.6}
+footer .copy{font-size:15px;opacity:.38}
+@media(max-width:640px){body{font-size:18px}.item{padding:22px}}
+</style>
+</head>
+<body>
+
+<header class="head">
+  <div class="wrap">
+    <div class="bar">
+      <img src="img/logo-cream.svg" alt="شعار حيدر">
+      <a class="home" href="https://haydarvsky.github.io/">الصفحةُ الرئيسة</a>
+    </div>
+    <h1>المقالات</h1>
+    <p class="sub">مساءلاتٌ في تحقيقِ النصِّ والشعرِ واللغة، وقراءاتٌ في الثقافةِ والصورة.</p>
+    <div class="rule"></div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="list">
+
+      <a class="item" href="safar.html">
+        <div class="kicker">قراءةٌ أنثروبولوجيَّة سيميائيَّة</div>
+        <h2>حَرْقُ صَفَر</h2>
+        <div class="line">في طقسِ حرقِ «صفر» ودلالاتِه: قراءةٌ في الرمزِ والعادةِ وصورةِ الزمن.</div>
+        <div class="go">اقرأ المقال <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6"/></svg></div>
+      </a>
+
+      <a class="item" href="sewah.html">
+        <div class="kicker">مساءلةٌ تحقيقيَّةٌ نقديَّة</div>
+        <h2>في ضبطِ بيتٍ من بائيَّةِ الكوَّاز</h2>
+        <div class="line">«سواءٌ» أم «سواهُ»؟ — تحقيقُ لفظةٍ في بيتٍ للشيخِ صالحٍ الكوَّاز الحلّي.</div>
+        <div class="go">اقرأ المقال <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6"/></svg></div>
+      </a>
+
+      <a class="item" href="abnak.html">
+        <div class="kicker">مساءلةٌ نقديَّة</div>
+        <h2>في ضبطِ بيتِ الشيخِ صالحٍ الكوَّاز</h2>
+        <div class="line">«أبناكَ» أم «ابنيكَ»؟ — موازنةٌ بين النسخِ وترجيحُ الضبطِ الصحيح.</div>
+        <div class="go">اقرأ المقال <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6"/></svg></div>
+      </a>
+
+      <a class="item" href="tasmiya.html">
+        <div class="kicker">مساءلةٌ نقديَّة</div>
+        <h2>في تسميةِ قصائدِ «الطفّيات»</h2>
+        <div class="line">من ديوانِ الشيخِ صالحٍ الكوَّاز الحلّي: مساءلةُ التسميةِ ومدى انطباقِها.</div>
+        <div class="go">اقرأ المقال <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6"/></svg></div>
+      </a>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="img/logo-cream.svg" alt="شعار حيدر">
+    <div class="sig">حيدر المعاتيق — أبو إيليا</div>
+    <div class="copy">جميعُ الحقوق محفوظة · ٢٠٢٦</div>
+  </div>
+</footer>
+
+</body>
+</html>
