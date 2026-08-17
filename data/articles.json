@@ -372,6 +372,166 @@
       "featured": false,
       "hidden": false,
       "order": 18
+    },
+    {
+      "id": "tandeed-safha",
+      "file": "tandeed-safha.html",
+      "title": "تشريحُ صفحةِ الكتابِ العربي",
+      "kicker": "في التنضيد",
+      "teaser": "قبل أن تفتحَ إنديزاين: ما الذي يجعلُ الصفحةَ مقروءةً؟ الهامشُ الداخليُّ والمِسطرةُ وارتفاعُ السطرِ والشبكة — أرقامٌ لا أذواق.",
+      "category": "التنضيد",
+      "series": "",
+      "tags": [
+        "هوامش",
+        "شبكة",
+        "مقروئية"
+      ],
+      "date": "2026-08",
+      "minutes": 7,
+      "cover": "images/tandeed-safha-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 19
+    },
+    {
+      "id": "tandeed-hawamish",
+      "file": "tandeed-hawamish.html",
+      "title": "الهوامشُ في الكتابِ العربي",
+      "kicker": "في التنضيد",
+      "teaser": "الحاشيةُ ليست ملحقاً بل جزءٌ من جسمِ الكتاب. في ضبطِ ترقيمِها وموضعِها وبنطِها، وفي حلِّ مشكلاتِها التي لا يحلُّها إنديزاين وحده.",
+      "category": "التنضيد",
+      "series": "",
+      "tags": [
+        "حواشي",
+        "تخريج",
+        "إنديزاين"
+      ],
+      "date": "2026-08",
+      "minutes": 6,
+      "cover": "images/tandeed-hawamish-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 20
+    },
+    {
+      "id": "tandeed-faharis",
+      "file": "tandeed-faharis.html",
+      "title": "فهارسُ الكتاب: أربعةٌ لا واحد",
+      "kicker": "في التنضيد",
+      "teaser": "الفهرسُ ليس آخرَ عملٍ في الكتابِ بل أوّلُ اختبارٍ لصحّةِ بنائه. كيف يُبنى كلُّ فهرسٍ من الأربعة، وما الذي يُبنى آلياً وما يحتاجُ يدَك.",
+      "category": "التنضيد",
+      "series": "",
+      "tags": [
+        "فهرسة",
+        "أنماط",
+        "تراث"
+      ],
+      "date": "2026-08",
+      "minutes": 7,
+      "cover": "images/tandeed-faharis-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 21
+    },
+    {
+      "id": "tandeed-maqas",
+      "file": "tandeed-maqas.html",
+      "title": "سلّمُ البنطِ ومقاسُ الكتاب",
+      "kicker": "في التنضيد",
+      "teaser": "مقاسُ الكتابِ وبنطُ المتنِ وسلّمُ العناوين: قراراتٌ ثلاثةٌ تُتَّخَذُ قبل الصفحةِ الأولى، ومن أخطأَ فيها أعادَ الكتابَ من أوّله.",
+      "category": "التنضيد",
+      "series": "",
+      "tags": [
+        "بنط",
+        "مقاس",
+        "تايبوغرافي"
+      ],
+      "date": "2026-08",
+      "minutes": 7,
+      "cover": "images/tandeed-maqas-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 22
+    },
+    {
+      "id": "tadreeb-haqiba",
+      "file": "tadreeb-haqiba.html",
+      "title": "تصميمُ الحقيبةِ التدريبية",
+      "kicker": "في التدريبِ والتعليم",
+      "teaser": "الحقيبةُ ليست شرائحَ باوربوينت. خمسُ مراحلَ يُبنى عليها التدريبُ، وكلُّ مرحلةٍ تُخرِجُ وثيقةً تُسلَّمُ وتُراجَع.",
+      "category": "التدريب والتعليم",
+      "series": "",
+      "tags": [
+        "حقيبة",
+        "أهداف",
+        "ADDIE"
+      ],
+      "date": "2026-08",
+      "minutes": 8,
+      "cover": "images/tadreeb-haqiba-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 23
+    },
+    {
+      "id": "tadreeb-sharaeh",
+      "file": "tadreeb-sharaeh.html",
+      "title": "شرائحُ لا تُقرَأُ عنها",
+      "kicker": "في التدريبِ والتعليم",
+      "teaser": "لماذا تُنقِصُ الشريحةُ المزدحمةُ التعلّمَ؟ مبادئُ الوسائطِ المتعدّدةِ مطبَّقةً على شرائحِ التدريبِ العربية.",
+      "category": "التدريب والتعليم",
+      "series": "",
+      "tags": [
+        "عرض",
+        "شرائح",
+        "وسائط"
+      ],
+      "date": "2026-08",
+      "minutes": 6,
+      "cover": "images/tadreeb-sharaeh-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 24
+    },
+    {
+      "id": "tadreeb-taqyim",
+      "file": "tadreeb-taqyim.html",
+      "title": "تقييمُ التدريبِ: أربعةُ مستويات",
+      "kicker": "في التدريبِ والتعليم",
+      "teaser": "استبيانُ الرضا أسهلُ ما يُجمَعُ وأقلُّ ما يدلُّ. كيف تُقاسُ الدورةُ على مستوياتِ كيركباتريك الأربعةِ عملياً؟",
+      "category": "التدريب والتعليم",
+      "series": "",
+      "tags": [
+        "تقييم",
+        "كيركباتريك",
+        "قياس"
+      ],
+      "date": "2026-08",
+      "minutes": 7,
+      "cover": "images/tadreeb-taqyim-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 25
+    },
+    {
+      "id": "tadreeb-ai",
+      "file": "tadreeb-ai.html",
+      "title": "الذكاءُ الاصطناعيُّ في قاعةِ التدريب",
+      "kicker": "في التدريبِ والتعليم",
+      "teaser": "من التفاعلِ الحيِّ بجوّالِ المتدرّبِ إلى توليدِ الأمثلةِ في اللحظة: تجربةٌ عمليةٌ في استعمالِ الذكاءِ الاصطناعيِّ أثناء التدريبِ لا بعدَه.",
+      "category": "التدريب والتعليم",
+      "series": "",
+      "tags": [
+        "ذكاء اصطناعي",
+        "تفاعل",
+        "تدريب"
+      ],
+      "date": "2026-08",
+      "minutes": 7,
+      "cover": "images/tadreeb-ai-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 26
     }
   ]
 }
