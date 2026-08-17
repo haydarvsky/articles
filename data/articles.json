@@ -14,7 +14,7 @@
         "طقوس"
       ],
       "date": "2026-08",
-      "minutes": 0,
+      "minutes": 6,
       "cover": "images/safar-transparent.png",
       "featured": true,
       "hidden": false,
@@ -32,7 +32,7 @@
         "شعر"
       ],
       "date": "2026-08",
-      "minutes": 0,
+      "minutes": 14,
       "cover": "",
       "featured": false,
       "hidden": false,
@@ -50,7 +50,7 @@
         "شعر"
       ],
       "date": "2026-07",
-      "minutes": 0,
+      "minutes": 7,
       "cover": "",
       "featured": false,
       "hidden": false,
@@ -69,7 +69,7 @@
         "مصطلح"
       ],
       "date": "2026-07",
-      "minutes": 0,
+      "minutes": 6,
       "cover": "",
       "featured": false,
       "hidden": false,
@@ -114,6 +114,264 @@
       "featured": false,
       "hidden": false,
       "order": 5
+    },
+    {
+      "id": "sard-sura",
+      "file": "sard-sura.html",
+      "title": "سرد الصورة",
+      "kicker": "دراسةٌ في السرد",
+      "teaser": "“اقترنت دلالة السرد في اللغة العربية بالنّسج، وجودة السبك، وحسن الصوغ، والبراعة في إيراد الأخبار وفي تركيبها. وتردّدت هذه المعاني مجتمعة، أو متفرقة في…",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "سرد",
+        "سيمياء",
+        "صورة"
+      ],
+      "date": "",
+      "minutes": 4,
+      "cover": "images/sard-sura-cover.png",
+      "featured": false,
+      "hidden": false,
+      "order": 6
+    },
+    {
+      "id": "safar-qahwa",
+      "file": "safar-qahwa.html",
+      "title": "قراءةٌ في «سِفر القهوة»",
+      "kicker": "قراءةٌ في رواية",
+      "teaser": "اعتاد العرب على ذكر المعشوقة في حالتها الأولى، وتصوّرها في كل لحظاتها الآنية، وتخيّلها في غيبتها وحضورها، وقربها وبعدها، وخلوتها وسفرها، ويبقى في تطوافه…",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "رواية",
+        "نقد",
+        "قهوة"
+      ],
+      "date": "",
+      "minutes": 5,
+      "cover": "images/safar-qahwa-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 7
+    },
+    {
+      "id": "shajarat",
+      "file": "shajarat.html",
+      "title": "شجرةُ الحياةِ وفقرُ الدمِ المنجليّ",
+      "kicker": "قراءةٌ في البيئةِ والإنسان",
+      "teaser": "تحدّث علي أكبر بوشهري في كتابة تاريخ البحرين القديم، في آخر فصل منه عن شجرة الحياة التي تتواجد قريبة من جبل الدخان  في منطقة تسمى (صخير) بالبحرين، وقد جاء…",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "البحرين",
+        "بيئة",
+        "تاريخ"
+      ],
+      "date": "",
+      "minutes": 3,
+      "cover": "images/shajarat-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 8
+    },
+    {
+      "id": "ahzan",
+      "file": "ahzan.html",
+      "title": "عَلّمَنِيْ حُبُّكِ أنْ أحْزَنْ",
+      "kicker": "قراءةٌ في نصٍّ لنزار قبّاني",
+      "teaser": "هناك ما يدعوني لأتناول نصاً لـ نزار قباني لأني أجد في نصوصه مدخلاً سلساً لطلّاب الجامعة في مجال التطبيقات النقدية وهذا يعود لعدّة عوامل في نصوصه منها:",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "شعر",
+        "نزار قباني",
+        "نقد"
+      ],
+      "date": "",
+      "minutes": 7,
+      "cover": "images/ahzan-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 9
+    },
+    {
+      "id": "dali",
+      "file": "dali.html",
+      "title": "صورةُ سلفادور دالي في La Casa de Papel",
+      "kicker": "قراءةٌ في الصورةِ والرمز",
+      "teaser": "سلفادور دالي (1904-1989) الفنان الإسباني الشهير بغرابة أطواره وتصرفاته اللامسؤولة،المدلل والمضطرب نفسيًّا والعاشق لكل ما هو غير مألوف، يعد من أهم…",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "فنّ",
+        "سيمياء",
+        "سينما"
+      ],
+      "date": "",
+      "minutes": 5,
+      "cover": "images/dali-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 10
+    },
+    {
+      "id": "kan-ya-makan",
+      "file": "kan-ya-makan.html",
+      "title": "كان يا مكان",
+      "kicker": "في أراضي دلمون",
+      "teaser": "(أراضي دلمون) هو الوصف الذي أضعه في خانة التعريف بالمكان في برامج التواصل الاجتماعي، ودائمًا ما يثير المكان في نفسي أسئلة عن جدوائية التعبير والوصف عن…",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "دلمون",
+        "حكاية",
+        "تاريخ"
+      ],
+      "date": "",
+      "minutes": 8,
+      "cover": "images/kan-ya-makan-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 11
+    },
+    {
+      "id": "wittgenstein",
+      "file": "wittgenstein.html",
+      "title": "كتبتُ إلى فتجنشتين",
+      "kicker": "أوراقٌ إلى فيلسوف",
+      "teaser": "أوراق كتبتها ووضعتها على طاولة فتجنشتين في مدرسته الإبتدائية التي كان يعمل معلّماًُ فيها، وقد هجرها سريعًأ",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "فلسفة",
+        "لغة"
+      ],
+      "date": "",
+      "minutes": 1,
+      "cover": "images/wittgenstein-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 12
+    },
+    {
+      "id": "freud",
+      "file": "freud.html",
+      "title": "فرويد تحت العلاج",
+      "kicker": "جلسةٌ متخيَّلة",
+      "teaser": ": تابوتٌ معلّق على سقف غرفتي .. ! أوووه ... لقد أضعتُ حقيبة السفر يا فرويد",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "تحليل نفسي",
+        "سينما"
+      ],
+      "date": "",
+      "minutes": 3,
+      "cover": "images/freud-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 13
+    },
+    {
+      "id": "nur-tasawir",
+      "file": "nur-tasawir.html",
+      "title": "النورُ في تصاويرِ المعصومين",
+      "kicker": "دراسةٌ سيميائية",
+      "teaser": "اعتدنا تصوير تشابيه أئمة أهل البيت عليهم السلام مشمولة بهالة من نور وإضاءة تغيب فيها ملامح الوجه، وفي هذه الأسطر محاولة لتحليل ما تدل عليه هذه الطريقة في…",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "سيمياء",
+        "تصاوير",
+        "دراسة"
+      ],
+      "date": "",
+      "minutes": 5,
+      "cover": "images/nur-tasawir-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 14
+    },
+    {
+      "id": "magritte",
+      "file": "magritte.html",
+      "title": "لوحةُ رينيه ماغريت: ابنُ الإنسان",
+      "kicker": "قراءةٌ في لوحة",
+      "teaser": "شخصٌ يلبس لباساً رسمياً؛ معطفاً طويلاً وقبعةً سوداء، واقفٌ أمام البحر مسبلٌ يديه يفصل بينه وبين البحر سور حجري صغير والسماء فوقه ملبّدة بالغيوم، وتغطي…",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "فنّ",
+        "لوحة",
+        "فلسفة"
+      ],
+      "date": "",
+      "minutes": 3,
+      "cover": "images/magritte-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 15
+    },
+    {
+      "id": "joker",
+      "file": "joker.html",
+      "title": "الجوكر: الدميةُ الفلسفيةُ لنيتشه",
+      "kicker": "الفلسفةُ في السينما",
+      "teaser": "ربما سمع الكثير أن فلم الجوكر JOKER 2019 لديه الكثير من نقاط الالتقاء بأفكار وأطروحات الفيلسوف الألماني فريدريش نيتشه Friedrich Nietzsche.",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "سينما",
+        "فلسفة",
+        "نيتشه"
+      ],
+      "date": "",
+      "minutes": 6,
+      "cover": "images/joker-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 16
+    },
+    {
+      "id": "rihla",
+      "file": "rihla.html",
+      "title": "الرحلةُ الأدبية",
+      "kicker": "قصاصاتٌ في الشعريّة",
+      "teaser": "هذه القصاصات المتفرّقة، لا تعبّر عن منهجية محددة، ولا اشتغال حقيقي، بل هي محاولات لاقتناص أدوات يسيرة تعين القارئ الراغب في الانفتاح على النص الإبداعي…",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "شعرية",
+        "نقد",
+        "ترجمة"
+      ],
+      "date": "",
+      "minutes": 16,
+      "cover": "images/rihla-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 17
+    },
+    {
+      "id": "istishraf",
+      "file": "istishraf.html",
+      "title": "استشرافُ المستقبل",
+      "kicker": "دراسةٌ في الاستشراف",
+      "teaser": "قبل البدء في دراسة الاستشراف لنرجع بكم إلى الذاكرة البشرية حول هذا الموضوع في اهتمام علماء الأنثربولوجيا ودراستهم لمحاولات الإنسان القديم وشغفه الملح على…",
+      "category": "الأدب والثقافة",
+      "series": "",
+      "tags": [
+        "استشراف",
+        "مستقبل",
+        "دراسة"
+      ],
+      "date": "",
+      "minutes": 18,
+      "cover": "images/istishraf-cover.jpg",
+      "featured": false,
+      "hidden": false,
+      "order": 18
     }
   ]
 }
