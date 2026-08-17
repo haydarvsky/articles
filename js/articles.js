@@ -31,13 +31,14 @@
     reset: document.getElementById('reset')
   };
 
-  var ALL = [];
-  var activeTag = '';
+  var ALL = [], CATS = [];
+  var activeCat = '';
 
   /* ---------- التحميل ---------- */
   fetch('data/articles.json', { cache: 'no-cache' })
     .then(function (r) { return r.json(); })
     .then(function (d) {
+      CATS = d.categories || [];
       ALL = (d.articles || [])
         .filter(function (a) { return !a.hidden && a.file; })
         .sort(function (a, b) {
@@ -51,20 +52,22 @@
       els.list.innerHTML = '<div class="empty"><b>تعذَّر تحميلُ المقالات</b>أعِدْ تحديثَ الصفحة بعد قليل.</div>';
     });
 
-  /* ---------- شرائحُ الموضوعات ---------- */
+  /* ---------- شرائحُ التصنيفات: من تصنيفاتِه بترتيبِها، ولا يُعرَضُ تصنيفٌ خالٍ ---------- */
   function buildChips() {
     var counts = {};
-    ALL.forEach(function (a) { (a.tags || []).forEach(function (t) { counts[t] = (counts[t] || 0) + 1; }); });
-    var tags = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; }).slice(0, 7);
-    if (!tags.length) return;
-    var html = '<button class="chip" type="button" data-tag="" aria-pressed="true">الكلّ</button>';
-    tags.forEach(function (t) {
-      html += '<button class="chip" type="button" data-tag="' + esc(t) + '" aria-pressed="false">' + esc(t) + '</button>';
-    });
-    els.chips.innerHTML = html;
+    ALL.forEach(function (a) { if (a.category) counts[a.category] = (counts[a.category] || 0) + 1; });
+    var cats = CATS.filter(function (c) { return counts[c]; });
+    /* تصنيفٌ في مقالةٍ ولم يُدرَجْ في القائمة يُضافُ آخراً كي لا يضيع */
+    Object.keys(counts).forEach(function (c) { if (cats.indexOf(c) < 0) cats.push(c); });
+    if (cats.length < 2) { els.chips.innerHTML = ''; return; }
+    els.chips.innerHTML = '<button class="chip" type="button" data-cat="" aria-pressed="true">الكلّ</button>'
+      + cats.map(function (c) {
+        return '<button class="chip" type="button" data-cat="' + esc(c) + '" aria-pressed="false">'
+          + esc(c) + ' <span class="n">' + arNum(counts[c]) + '</span></button>';
+      }).join('');
     els.chips.addEventListener('click', function (e) {
       var b = e.target.closest('.chip'); if (!b) return;
-      activeTag = b.dataset.tag || '';
+      activeCat = b.dataset.cat || '';
       [].forEach.call(els.chips.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
       render();
     });
@@ -72,9 +75,9 @@
 
   /* ---------- التصفية والعرض ---------- */
   function match(a, q) {
-    if (activeTag && (a.tags || []).indexOf(activeTag) < 0) return false;
+    if (activeCat && a.category !== activeCat) return false;
     if (!q) return true;
-    var hay = [a.title, a.kicker, a.teaser, a.series].concat(a.tags || []).join(' ');
+    var hay = [a.title, a.kicker, a.teaser, a.series, a.category].concat(a.tags || []).join(' ');
     return hay.indexOf(q) > -1;
   }
 
@@ -87,12 +90,18 @@
   }
 
   function cardHtml(a, i) {
-    var tags = (a.tags || []).slice(0, 3).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('');
-    return '<a class="item" href="' + esc(a.file) + '" data-in style="--d:' + (Math.min(i, 8) * 55) + 'ms">'
+    var chip = a.category ? '<div class="tagrow"><span class="tag cat">' + esc(a.category) + '</span></div>' : '';
+    /* الصورةُ كاملةً بنسبتِها على شريطٍ ملوَّن؛ وإن سقطت حُذف الشريطُ فلا يبقى فراغ */
+    var strip = a.cover
+      ? '<span class="strip"><img src="' + esc(a.cover) + '" alt="" loading="lazy"'
+        + ' onerror="var s=this.closest(\'.strip\'),c=s.closest(\'.item\');c.classList.add(\'no-strip\');s.remove()"></span>'
+      : '';
+    return '<a class="item' + (a.cover ? '' : ' no-strip') + '" href="' + esc(a.file) + '" data-in style="--d:' + (Math.min(i, 8) * 55) + 'ms">'
+      + strip
       + (a.kicker ? '<div class="kicker">' + esc(a.kicker) + '</div>' : '')
       + '<h3>' + esc(a.title) + '</h3>'
       + (a.teaser ? '<p class="teaser">' + esc(a.teaser) + '</p>' : '')
-      + (tags ? '<div class="tagrow">' + tags + '</div>' : '')
+      + chip
       + metaHtml(a)
       + '<span class="go">اقرأ المقال <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6"/></svg></span>'
       + '</a>';
@@ -108,6 +117,7 @@
       + (a.kicker ? '<div class="kicker">' + esc(a.kicker) + '</div>' : '')
       + '<h2>' + esc(a.title) + '</h2>'
       + (a.teaser ? '<p class="teaser">' + esc(a.teaser) + '</p>' : '')
+      + (a.category ? '<div class="tagrow"><span class="tag cat">' + esc(a.category) + '</span></div>' : '')
       + metaHtml(a)
       + '</div>' + cover + '</a>';
   }
@@ -116,7 +126,7 @@
     var q = (els.q.value || '').trim();
     var shown = ALL.filter(function (a) { return match(a, q); });
 
-    var featured = (!q && !activeTag) ? shown.filter(function (a) { return a.featured; })[0] : null;
+    var featured = (!q && !activeCat) ? shown.filter(function (a) { return a.featured; })[0] : null;
     var rest = featured ? shown.filter(function (a) { return a !== featured; }) : shown;
 
     els.feat.innerHTML = featured ? featHtml(featured) : '';
@@ -124,7 +134,7 @@
     els.empty.hidden = shown.length > 0;
     els.count.textContent = shown.length
       ? arNum(shown.length) + ' ' + (shown.length === 1 ? 'مقالة' : (shown.length === 2 ? 'مقالتان' : 'مقالات'))
-        + (activeTag ? ' في «' + activeTag + '»' : '')
+        + (activeCat ? ' في «' + activeCat + '»' : '')
       : '';
 
     animateIn();
@@ -181,8 +191,8 @@
   var t;
   els.q.addEventListener('input', function () { clearTimeout(t); t = setTimeout(render, 140); });
   els.reset.addEventListener('click', function () {
-    els.q.value = ''; activeTag = '';
-    [].forEach.call(els.chips.children, function (c) { c.setAttribute('aria-pressed', String(!c.dataset.tag)); });
+    els.q.value = ''; activeCat = '';
+    [].forEach.call(els.chips.children, function (c) { c.setAttribute('aria-pressed', String(!c.dataset.cat)); });
     render(); els.q.focus();
   });
   /* Esc يُفرِغ البحث */

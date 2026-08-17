@@ -14,14 +14,15 @@
     deletes: [],                 // مساراتٌ تُحذَف
     editing: null,               // index أو null
     dirty: false,
-    repoFiles: []                // ملفاتُ html في المستودع
+    repoFiles: [],               // ملفاتُ html في المستودع
+    categories: []               // تصنيفاتُه هو، بترتيبِها
   };
 
   var $ = function (id) { return document.getElementById(id); };
   var el = {};
   ['gate', 'app', 'token', 'tokenSave', 'tryMock', 'who', 'save', 'dirty', 'mock', 'rows', 'newBtn',
     'edTitle', 'drop', 'file', 'fname', 'pick', 'pickWrap', 'title', 'kicker', 'series', 'teaser',
-    'tags', 'dmonth', 'dyear', 'minutes', 'id', 'cov', 'covBtn', 'covClear', 'covThumb', 'featured', 'hidden',
+    'tags', 'category', 'cats', 'newCat', 'addCat', 'dmonth', 'dyear', 'minutes', 'id', 'cov', 'covBtn', 'covClear', 'covThumb', 'featured', 'hidden',
     'apply', 'cancel', 'del', 'pcard', 'status'].forEach(function (k) { el[k] = $(k); });
 
   var AR = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
@@ -56,8 +57,12 @@
     el.mock.hidden = false; el.gate.hidden = true; el.app.hidden = false;
     el.who.textContent = 'تجربةٌ محلّية — لا يُنشَرُ شيء';
     fetch(DATA_PATH, { cache: 'no-cache' }).then(function (r) { return r.json(); })
-      .then(function (d) { state.articles = d.articles || []; renderRows(); newArticle(); })
-      .catch(function () { state.articles = []; renderRows(); newArticle(); });
+      .then(function (d) {
+        state.articles = d.articles || [];
+        state.categories = d.categories || [];
+        renderCats(); renderRows(); newArticle();
+      })
+      .catch(function () { state.articles = []; renderCats(); renderRows(); newArticle(); });
   }
 
   function connect(token) {
@@ -82,11 +87,13 @@
       gh.tree().catch(function () { return new Map(); })
     ]).then(function (res) {
       var f = res[0], tree = res[1];
-      state.articles = f ? (JSON.parse(f.text).articles || []) : [];
+      var parsed = f ? JSON.parse(f.text) : {};
+      state.articles = parsed.articles || [];
+      state.categories = parsed.categories || [];
       state.repoFiles = Array.from(tree.keys()).filter(function (p) {
         return /\.html?$/i.test(p) && p.indexOf('/') < 0 && p !== 'index.html' && p !== 'admin.html';
       });
-      renderRows(); fillPick(); newArticle();
+      renderCats(); renderRows(); fillPick(); newArticle();
     });
   }
 
@@ -98,7 +105,8 @@
       return '<div class="row' + (state.editing === i ? ' sel' : '') + (a.hidden ? ' hid' : '') + '" draggable="true" data-i="' + i + '">'
         + '<span class="grip" title="اسحبْ للترتيب">⠿</span>'
         + '<span class="tx"><b>' + esc(a.title || '(بلا عنوان)') + '</b>'
-        + '<i>' + esc(a.file || '—') + (a.date ? ' · ' + esc(fmtDate(a.date)) : '') + '</i></span>'
+        + '<i>' + (a.category ? esc(a.category) + ' · ' : '') + esc(a.file || '—')
+        + (a.date ? ' · ' + esc(fmtDate(a.date)) : '') + '</i></span>'
         + '<span class="acts">'
         + '<button class="icobtn star' + (a.featured ? ' star-on' : '') + '" data-act="feat" title="مميّزة">'
         + '<svg viewBox="0 0 24 24" ' + (a.featured ? 'fill="currentColor" stroke="none"' : '') + '><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8z"/></svg></button>'
@@ -159,13 +167,70 @@
   });
   function normalizeOrder() { state.articles.forEach(function (a, i) { a.order = i; }); }
 
+  /* ---------------- التصنيفات ---------------- */
+  function catCount(c) {
+    return state.articles.filter(function (a) { return a.category === c; }).length;
+  }
+  function renderCats() {
+    el.cats.innerHTML = state.categories.length
+      ? state.categories.map(function (c, i) {
+        var n = catCount(c);
+        return '<span class="catchip" draggable="true" data-i="' + i + '">'
+          + '<b>' + esc(c) + '</b>'
+          + '<i>' + (n ? arNum(n) : '٠') + '</i>'
+          + '<button type="button" data-rmcat="' + i + '" title="احذفِ التصنيف">×</button></span>';
+      }).join('')
+      : '<span class="sm" style="color:rgba(42,26,15,.45)">لا تصنيفَ بعد — أضِفْ واحداً</span>';
+    /* قائمةُ الاختيارِ في النموذج */
+    var cur = draft ? (draft.category || '') : '';
+    el.category.innerHTML = '<option value="">— بلا تصنيف —</option>'
+      + state.categories.map(function (c) {
+        return '<option value="' + esc(c) + '"' + (c === cur ? ' selected' : '') + '>' + esc(c) + '</option>';
+      }).join('')
+      + (cur && state.categories.indexOf(cur) < 0 ? '<option value="' + esc(cur) + '" selected>' + esc(cur) + ' (غيرُ مُدرَج)</option>' : '');
+  }
+  el.addCat.addEventListener('click', function () {
+    var v = el.newCat.value.trim();
+    if (!v) { el.newCat.focus(); return; }
+    if (state.categories.indexOf(v) > -1) { say('هذا التصنيفُ موجودٌ سلفاً', 'bad'); return; }
+    state.categories.push(v); el.newCat.value = '';
+    markDirty(true); renderCats();
+    say('أُضيفَ «' + v + '» — يظهرُ شريحةً في الصفحةِ حين تُنسَبُ إليه مقالة', 'ok');
+  });
+  el.newCat.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); el.addCat.click(); } });
+  el.cats.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-rmcat]'); if (!b) return;
+    var i = +b.dataset.rmcat, c = state.categories[i], n = catCount(c);
+    if (n) { say('لا يُحذَفُ «' + c + '» وفيه ' + arNum(n) + ' مقالة — انقلْها إلى تصنيفٍ آخرَ أوّلاً', 'bad'); return; }
+    if (!confirm('حذفُ التصنيف «' + c + '»؟')) return;
+    state.categories.splice(i, 1); markDirty(true); renderCats();
+  });
+  /* سحبُ التصنيفاتِ لترتيبِ الشرائح */
+  var dragC = null;
+  el.cats.addEventListener('dragstart', function (e) {
+    var c = e.target.closest('.catchip'); if (!c) return;
+    dragC = +c.dataset.i; c.classList.add('drag');
+  });
+  el.cats.addEventListener('dragover', function (e) { e.preventDefault(); });
+  el.cats.addEventListener('drop', function (e) {
+    e.preventDefault();
+    var c = e.target.closest('.catchip'); if (!c || dragC == null) return;
+    var m = state.categories.splice(dragC, 1)[0];
+    state.categories.splice(+c.dataset.i, 0, m);
+    dragC = null; markDirty(true); renderCats();
+  });
+  el.cats.addEventListener('dragend', function () {
+    [].forEach.call(el.cats.children, function (c) { c.classList.remove('drag'); });
+    dragC = null;
+  });
+
   /* ---------------- المحرّر ---------------- */
   var draft = null;
 
   function blank() {
     var d = new Date();
     return {
-      id: '', file: '', title: '', kicker: '', teaser: '', series: '', tags: [],
+      id: '', file: '', title: '', kicker: '', teaser: '', category: (state.categories[0] || ''), series: '', tags: [],
       date: d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'),
       minutes: 0, cover: '', featured: false, hidden: false, order: state.articles.length
     };
@@ -181,6 +246,7 @@
     el.kicker.value = draft.kicker || '';
     el.series.value = draft.series || '';
     el.teaser.value = draft.teaser || '';
+    renderCats();
     el.tags.value = (draft.tags || []).join('، ');
     var dp = String(draft.date || '').split('-');
     el.dyear.value = dp[0] || '';
@@ -192,8 +258,17 @@
     el.fname.hidden = !draft.file;
     el.fname.textContent = draft.file ? 'الملفّ: ' + draft.file : '';
     el.drop.classList.toggle('has', !!draft.file);
-    setCovThumb(draft.cover ? (state.pending[draft.cover] ? 'data:image/jpeg;base64,' + state.pending[draft.cover].base64 : draft.cover) : '');
+    setCovThumb(coverSrc());
     preview();
+  }
+
+  /* مصدرُ عرضِ الغلاف: من المعلَّقاتِ إن كان جديداً (بنوعِه الصحيح) وإلا من المستودع */
+  function coverSrc() {
+    if (!draft.cover) return '';
+    var p = state.pending[draft.cover];
+    if (!p) return draft.cover;
+    if (p.text) return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(p.text);
+    return 'data:image/' + (/\.png$/i.test(draft.cover) ? 'png' : 'jpeg') + ';base64,' + p.base64;
   }
 
   function setCovThumb(src) {
@@ -206,6 +281,7 @@
     draft.kicker = el.kicker.value.trim();
     draft.series = el.series.value.trim();
     draft.teaser = el.teaser.value.trim();
+    draft.category = el.category.value;
     draft.tags = el.tags.value.split(/[،,]/).map(function (s) { return s.trim(); }).filter(Boolean);
     var yy = String(parseInt(el.dyear.value, 10) || '');
     draft.date = yy ? (yy + (el.dmonth.value ? '-' + el.dmonth.value : '')) : '';
@@ -223,10 +299,13 @@
     if (draft.date) m.push(fmtDate(draft.date));
     if (draft.minutes) m.push(arNum(draft.minutes) + ' دقيقةَ قراءة');
     if (draft.series) m.push(draft.series);
+    var cs = coverSrc();
     el.pcard.innerHTML =
-      (draft.kicker ? '<div class="k">' + esc(draft.kicker) + '</div>' : '')
+      (cs ? '<div class="pstrip"><img src="' + esc(cs) + '" alt=""></div>' : '')
+      + (draft.kicker ? '<div class="k">' + esc(draft.kicker) + '</div>' : '')
       + '<h4>' + esc(draft.title || 'عنوانُ المقالة') + '</h4>'
       + (draft.teaser ? '<p class="t">' + esc(draft.teaser) + '</p>' : '')
+      + (draft.category ? '<div class="tags"><span class="catbadge">' + esc(draft.category) + '</span></div>' : '')
       + (tags ? '<div class="tags">' + tags + '</div>' : '')
       + (m.length ? '<div class="m">' + esc(m.join(' · ')) + '</div>' : '');
   }
@@ -234,6 +313,7 @@
   ['title', 'kicker', 'series', 'teaser', 'tags', 'dmonth', 'dyear', 'minutes', 'id'].forEach(function (k) {
     el[k].addEventListener('input', preview);
   });
+  el.category.addEventListener('change', function () { preview(); renderCats(); });
   el.featured.addEventListener('change', preview);
   el.hidden.addEventListener('change', preview);
 
@@ -245,7 +325,7 @@
     if (draft.featured) state.articles.forEach(function (a) { a.featured = false; });
     if (state.editing == null) { state.articles.push(draft); state.editing = state.articles.length - 1; }
     else state.articles[state.editing] = draft;
-    normalizeOrder(); markDirty(true); renderRows();
+    normalizeOrder(); markDirty(true); renderRows(); renderCats();
     say('أُثبِتَ التعديلُ في القائمة — اضغطْ «حفظٌ ونشر» ليظهرَ في الصفحة', 'ok');
     draft = JSON.parse(JSON.stringify(state.articles[state.editing]));
     el.edTitle.textContent = 'تعديلُ مقالة';
@@ -348,13 +428,37 @@
   el.cov.addEventListener('change', function () {
     var f = el.cov.files[0]; if (!f) return;
     readForm();
-    ImgTools.compress(f, { maxEdge: 1600, quality: 0.85 }).then(function (r) {
-      var path = 'images/' + (draft.id || 'cover') + '-' + Date.now() + '.jpg';
+    var base = 'images/' + (draft.id || 'cover') + '-' + Date.now();
+
+    /* SVG يُحفَظُ نصّاً كما هو */
+    if (/\.svg$/i.test(f.name) || f.type === 'image/svg+xml') {
+      var fr = new FileReader();
+      fr.onload = function () {
+        var path = base + '.svg';
+        state.pending[path] = { text: String(fr.result) };
+        draft.cover = path;
+        setCovThumb('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(String(fr.result)));
+        markDirty(true); preview();
+        say('جُهِّزَ الغلافُ (SVG) — يُرفَعُ مع الحفظ', 'ok');
+      };
+      fr.readAsText(f, 'utf-8');
+      return;
+    }
+
+    /* PNG/WEBP تُبقى PNG كي **لا تُفقَدَ الخلفيةُ الشفّافة**؛ وغيرُها JPEG */
+    var keepAlpha = /\.(png|webp)$/i.test(f.name) || f.type === 'image/png' || f.type === 'image/webp';
+    ImgTools.compress(f, {
+      maxEdge: 1600,
+      quality: keepAlpha ? 1 : 0.85,
+      type: keepAlpha ? 'image/png' : 'image/jpeg'
+    }).then(function (r) {
+      var path = base + (keepAlpha ? '.png' : '.jpg');
       state.pending[path] = { base64: r.base64 };
       draft.cover = path;
       setCovThumb(r.dataUrl);
       markDirty(true); preview();
-      say('جُهِّزَ الغلافُ (' + ImgTools.fmtSize(r.size) + ') — يُرفَعُ مع الحفظ', 'ok');
+      say('جُهِّزَ الغلافُ ' + (keepAlpha ? 'بشفافيتِه (PNG) ' : '') + '(' + ImgTools.fmtSize(r.size)
+        + ' · ' + arNum(r.w) + '×' + arNum(r.h) + ') — يُرفَعُ مع الحفظ', 'ok');
     }).catch(function () { say('تعذّرَ تجهيزُ الصورة', 'bad'); });
   });
 
@@ -373,6 +477,7 @@
     gh.readText(DATA_PATH).then(function (cur) {
       var payload = {
         updated: new Date().toISOString().slice(0, 10),
+        categories: state.categories,
         articles: state.articles
       };
       var files = [{ path: DATA_PATH, text: JSON.stringify(payload, null, 2) + '\n' }];

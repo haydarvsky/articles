@@ -92,13 +92,32 @@
         </div>
 
         <div class="f">
-          <label for="kicker">التصنيف <span class="sm">(السطرُ البرتقالي)</span></label>
+          <label for="category">التصنيف</label>
+          <select id="category"></select>
+        </div>
+
+        <div class="f">
+          <label for="kicker">نوعُ المقالة <span class="sm">(السطرُ البرتقالي)</span></label>
           <input id="kicker" type="text" placeholder="مساءلةٌ نقديَّة">
+        </div>
+
+        <div class="f full">
+          <label>تصنيفاتُك <span class="sm">(هي شرائحُ التصفيةِ في الصفحة، بترتيبِها هذا)</span></label>
+          <div class="cats" id="cats"></div>
+          <div class="addcat">
+            <input id="newCat" type="text" placeholder="تصنيفٌ جديد…" autocomplete="off">
+            <button class="btn btn-line" type="button" id="addCat">+ أضِفْ</button>
+          </div>
         </div>
 
         <div class="f">
           <label for="series">السلسلة <span class="sm">(اختياري)</span></label>
           <input id="series" type="text" placeholder="سلسلة الكوّاز">
+        </div>
+
+        <div class="f">
+          <label for="tagsHint" style="visibility:hidden">.</label>
+          <div class="sm" id="tagsHint" style="line-height:1.6">الوسومُ أدناه للبحثِ فقط، ولا تظهرُ شرائحَ تصفية.</div>
         </div>
 
         <div class="f full">

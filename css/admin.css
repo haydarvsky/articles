@@ -126,7 +126,11 @@ header .who{font-size:15.5px;opacity:.72}
 .drop.has{border-style:solid;border-color:rgba(30,122,70,.5);background:rgba(30,122,70,.06)}
 .drop .fname{font-size:15px;color:var(--ok);margin-top:6px;word-break:break-all}
 .cov{display:flex;align-items:center;gap:12px;grid-column:1/-1}
-.cov .thumb{width:104px;height:74px;border-radius:12px;object-fit:cover;border:1px solid var(--line);background:rgba(15,76,58,.05);flex:none}
+.cov .thumb{
+  width:118px;height:84px;border-radius:12px;padding:6px;
+  object-fit:contain;border:1px solid var(--line);
+  background:linear-gradient(to bottom left,#10553F,#0A3428);flex:none;
+}
 .rowbtns{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 
 /* المعاينة */
@@ -136,6 +140,14 @@ header .who{font-size:15.5px;opacity:.72}
   background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 26px;
   display:flex;flex-direction:column;gap:9px;
 }
+.pcard{padding-top:0;overflow:hidden}
+.pcard .pstrip{
+  margin:0 -27px 14px;padding:18px;min-height:130px;
+  background:linear-gradient(to bottom left,#10553F,#0A3428);
+  border-radius:19px 19px 0 0;display:grid;place-items:center;
+}
+.pcard .pstrip img{width:100%;max-height:160px;object-fit:contain}
+.pcard>*:not(.pstrip):first-child{margin-top:24px}
 .pcard .k{font-size:16px;color:var(--amber);font-weight:700}
 .pcard h4{font-family:'Sakkal Saad Poster','Sakkal Saad',serif;font-size:26px;color:var(--green);margin:0;line-height:1.34}
 .pcard .t{font-size:17.5px;color:rgba(42,26,15,.66);margin:0;line-height:1.8}
@@ -157,3 +169,34 @@ header .who{font-size:15.5px;opacity:.72}
 .dirty::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--gold)}
 .mockbadge{background:var(--amber);color:#fff;border-radius:100px;padding:1px 12px;font-size:14.5px}
 @media (prefers-reduced-motion:reduce){*{transition-duration:1ms !important}}
+
+/* ===== مُدير التصنيفات ===== */
+.cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.catchip{
+  display:inline-flex;align-items:center;gap:8px;cursor:grab;
+  background:#fff;border:1px solid var(--line);border-radius:100px;
+  padding:5px 8px 5px 14px;font-size:16px;
+  transition:border-color var(--t-mid) var(--e-out),box-shadow var(--t-mid) var(--e-out);
+}
+.catchip:hover{border-color:rgba(194,120,10,.45)}
+.catchip.drag{opacity:.4}
+.catchip b{font-weight:700;color:var(--green)}
+.catchip i{
+  font-style:normal;font-size:14px;min-width:22px;text-align:center;
+  color:rgba(42,26,15,.55);background:rgba(15,76,58,.07);border-radius:100px;padding:0 7px;
+}
+.catchip button{
+  cursor:pointer;border:none;background:none;color:var(--red);
+  font-size:18px;line-height:1;padding:0 2px;border-radius:50%;
+}
+.catchip button:hover{color:#8d3728}
+.addcat{display:flex;gap:8px}
+.addcat input{
+  flex:1;min-height:44px;padding:9px 14px;background:#fff;color:var(--ink);
+  border:1px solid var(--line);border-radius:12px;outline:none;
+}
+.addcat input:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(194,120,10,.13)}
+.pcard .catbadge{
+  font-size:14.5px;padding:1px 13px;border-radius:100px;font-weight:700;
+  background:rgba(194,120,10,.1);color:var(--amber);border:1px solid rgba(194,120,10,.22);
+}
