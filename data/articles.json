@@ -18,7 +18,8 @@
       "cover": "images/safar-transparent.png",
       "featured": true,
       "hidden": false,
-      "order": 0
+      "order": 0,
+      "category": "الأدب والثقافة"
     },
     {
       "id": "sewah",
@@ -36,7 +37,8 @@
       "cover": "",
       "featured": false,
       "hidden": false,
-      "order": 1
+      "order": 1,
+      "category": "الأدب والثقافة"
     },
     {
       "id": "abnak",
@@ -54,7 +56,8 @@
       "cover": "",
       "featured": false,
       "hidden": false,
-      "order": 2
+      "order": 2,
+      "category": "الأدب والثقافة"
     },
     {
       "id": "tasmiya",
@@ -73,7 +76,8 @@
       "cover": "",
       "featured": false,
       "hidden": false,
-      "order": 3
+      "order": 3,
+      "category": "الأدب والثقافة"
     },
     {
       "id": "abdulhussain",
