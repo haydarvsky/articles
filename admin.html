@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لوحةُ تحكّم المقالات</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0A3428">
+<link rel="icon" href="img/logo-cream.svg">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img class="mark" src="img/logo-cream.svg" alt="شعار حيدر">
+    <h1>لوحةُ تحكّم المقالات <span id="mock" class="mockbadge" hidden>وضعُ تجربة</span></h1>
+    <span class="who" id="who"></span>
+    <span class="dirty" id="dirty" hidden>تغييراتٌ لم تُنشَر</span>
+    <a class="btn btn-ghost" href="index.html" target="_blank" rel="noopener">
+      عرضُ الصفحة
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6"/></svg>
+    </a>
+    <button class="btn btn-gold" id="save" disabled>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>
+      حفظٌ ونشر
+    </button>
+  </div>
+</header>
+
+<!-- بوابةُ الرمز -->
+<section class="gate" id="gate" hidden>
+  <h2>رمزُ الوصول إلى جِتهَب</h2>
+  <p>تحتاجُ اللوحةُ رمزاً يسمحُ بالكتابةِ في مستودع <code>haydarvsky/articles</code> ليُنشَرَ التعديلُ مباشرةً. يُحفظُ الرمزُ في متصفّحِك وحده ولا يُرسَلُ إلى أيِّ جهةٍ غيرِ جِتهَب.</p>
+  <ol>
+    <li>افتحْ <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">إنشاءَ رمزٍ دقيق (Fine-grained)</a>.</li>
+    <li>في <b>Repository access</b> اختر <code>Only select repositories</code> ثم <code>articles</code>.</li>
+    <li>في <b>Permissions → Repository</b> اجعلْ <code>Contents</code> = <code>Read and write</code>.</li>
+    <li>أنشئِ الرمزَ وانسخْه والصقْه هنا.</li>
+  </ol>
+  <div class="form">
+    <div class="f full">
+      <label for="token">الرمز</label>
+      <input id="token" type="text" placeholder="github_pat_… أو ghp_…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="rowbtns">
+      <button class="btn btn-gold" id="tokenSave">تحقّقْ واحفظْ</button>
+      <button class="btn btn-line" id="tryMock">جرّبِ اللوحةَ بلا رمز</button>
+    </div>
+  </div>
+</section>
+
+<!-- العمل -->
+<div class="wrap" id="app" hidden>
+  <div class="grid">
+
+    <!-- القائمة -->
+    <section class="panel">
+      <h2>المقالاتُ المنشورة</h2>
+      <p class="hint">اسحبْ لترتيبِ الظهور، وانقرْ مقالةً لتعديلِها.</p>
+      <div class="rows" id="rows"></div>
+      <div class="rowbtns">
+        <button class="btn btn-line" id="newBtn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          مقالةٌ جديدة
+        </button>
+      </div>
+    </section>
+
+    <!-- المحرّر -->
+    <section class="panel">
+      <h2 id="edTitle">مقالةٌ جديدة</h2>
+      <p class="hint">أفلتْ ملفَّ المقالة (HTML) فتُقرأُ بياناتُه تلقائياً، ثمّ راجعْها.</p>
+
+      <div class="form" id="form">
+
+        <div class="drop" id="drop">
+          <b>أفلتْ ملفَّ المقالة هنا</b>
+          أو انقرْ للاختيار — ملفُ HTML الذي بنيناه للمقالة
+          <div class="fname" id="fname" hidden></div>
+          <input type="file" id="file" accept=".html,.htm,text/html" hidden>
+        </div>
+
+        <div class="f full" id="pickWrap" hidden>
+          <label for="pick">أو اختر ملفاً موجوداً في المستودع <span class="sm">(ملفاتٌ غيرُ مفهرسة)</span></label>
+          <select id="pick"><option value="">—</option></select>
+        </div>
+
+        <div class="f full">
+          <label for="title">العنوان</label>
+          <input id="title" type="text" placeholder="حَرْقُ صَفَر">
+        </div>
+
+        <div class="f">
+          <label for="kicker">التصنيف <span class="sm">(السطرُ البرتقالي)</span></label>
+          <input id="kicker" type="text" placeholder="مساءلةٌ نقديَّة">
+        </div>
+
+        <div class="f">
+          <label for="series">السلسلة <span class="sm">(اختياري)</span></label>
+          <input id="series" type="text" placeholder="سلسلة الكوّاز">
+        </div>
+
+        <div class="f full">
+          <label for="teaser">السطرُ التعريفي</label>
+          <textarea id="teaser" placeholder="سطرٌ أو سطران يُغريان بالقراءة…"></textarea>
+        </div>
+
+        <div class="f">
+          <label for="tags">الوسوم <span class="sm">(بفواصل)</span></label>
+          <input id="tags" type="text" placeholder="تحقيق النصّ، شعر">
+        </div>
+
+        <div class="f">
+          <label for="dmonth">التاريخ</label>
+          <div style="display:flex;gap:8px">
+            <select id="dmonth" style="flex:1.3" aria-label="الشهر">
+              <option value="">—</option>
+              <option value="01">يناير</option><option value="02">فبراير</option>
+              <option value="03">مارس</option><option value="04">أبريل</option>
+              <option value="05">مايو</option><option value="06">يونيو</option>
+              <option value="07">يوليو</option><option value="08">أغسطس</option>
+              <option value="09">سبتمبر</option><option value="10">أكتوبر</option>
+              <option value="11">نوفمبر</option><option value="12">ديسمبر</option>
+            </select>
+            <input id="dyear" type="number" min="1900" max="2200" step="1" style="flex:1" placeholder="٢٠٢٦" aria-label="السنة">
+          </div>
+        </div>
+
+        <div class="f">
+          <label for="minutes">دقائقُ القراءة <span class="sm">(٠ = تُخفى)</span></label>
+          <input id="minutes" type="number" min="0" max="300" step="1">
+        </div>
+
+        <div class="f">
+          <label for="id">المعرّف <span class="sm">(اسمُ الملفِّ بلا امتداد)</span></label>
+          <input id="id" type="text" placeholder="safar" spellcheck="false">
+        </div>
+
+        <div class="cov">
+          <img class="thumb" id="covThumb" alt="">
+          <div style="flex:1">
+            <label for="cov" style="font-size:15.5px;color:rgba(42,26,15,.65);font-weight:700">غلافُ البطاقة <span class="sm">(اختياري — للمقالةِ المميّزة)</span></label>
+            <div class="rowbtns" style="margin-top:6px">
+              <button class="btn btn-line" type="button" id="covBtn">اختر صورة</button>
+              <button class="btn btn-red" type="button" id="covClear" hidden>أزِلِ الغلاف</button>
+            </div>
+            <input type="file" id="cov" accept="image/*" hidden>
+          </div>
+        </div>
+
+        <div class="checks">
+          <label><input type="checkbox" id="featured"> مقالةٌ مميّزة <span class="sm">(واحدةٌ فقط)</span></label>
+          <label><input type="checkbox" id="hidden"> مخفيّة <span class="sm">(لا تظهرُ في الصفحة)</span></label>
+        </div>
+
+        <div class="rowbtns">
+          <button class="btn btn-gold" type="button" id="apply">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>
+            أثبِتِ التعديل
+          </button>
+          <button class="btn btn-line" type="button" id="cancel">إلغاء</button>
+          <button class="btn btn-red" type="button" id="del" hidden>احذفْ من الفهرس</button>
+        </div>
+      </div>
+
+      <div class="prev">
+        <h3>معاينةُ البطاقة</h3>
+        <div class="pcard" id="pcard"></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="status" id="status"></div>
+
+<script src="js/gh-api.js"></script>
+<script src="js/imgtools.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
